@@ -15,7 +15,7 @@ import http from "http";
 // var port = normalizePort(process.env.PORT || "3000");
 // app.set("port", port);
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5000;
 
 /**
  * Create HTTP server.
