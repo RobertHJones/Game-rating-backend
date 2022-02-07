@@ -13,12 +13,12 @@ console.log(host);
 // const pool = new Pool()
 const pool = new pg.Pool({
   // data from heroku
-  // user: username,
-  // host: host,
-  // database: dbname,
-  // password: password,
-  // port: port,
-  connectionString: databaseURL,
+  user: username,
+  host: host,
+  database: dbname,
+  password: password,
+  port: port,
+  // connectionString: databaseURL,
   ssl: { rejectUnauthorized: false },
 });
 
