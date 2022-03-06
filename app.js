@@ -8,11 +8,12 @@ import logger from "morgan";
 import indexRouter from "./routes/index.js";
 // import usersRouter from "./routes/users.js";
 
-var app = express();
+const app = express();
 
 app.use(logger("dev"));
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header({ "Access-Control-Allow-Origin": "*" });
+  next();
 });
 // app.use(cors());
 app.use(express.json());
