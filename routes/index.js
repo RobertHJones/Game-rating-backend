@@ -17,13 +17,12 @@ import {
   getGameBySearch,
 } from "../models/functions.js";
 
-/* GET users listing. */
-// router.get("/", function (req, res, next) {
-//   res.send("respond with a resource");
-// });
+router.get("/", function (req, res, next) {
+  res.send("respond with a resource");
+});
 
 // GET ALL GAMES OR SEARCH
-router.get("/", async function (req, res) {
+router.get("/games", async function (req, res) {
   const { title, rating, band, genre, year, developer, comments } = req.query;
 
   if (title) {
@@ -102,14 +101,14 @@ router.get("/", async function (req, res) {
 // });
 
 // GET GAME BY ID
-router.get("/:id", async function (req, res) {
+router.get("/games/:id", async function (req, res) {
   const game = Number(req.params.id);
   const returnedGame = await getGameByID(game);
   res.json({ success: true, payload: returnedGame });
 });
 
 // ADD NEW GAME
-router.post("/", async function (req, res, next) {
+router.post("/games", async function (req, res, next) {
   console.log(req);
   const { title, rating, band, genre, year, developer, comments, image } =
     req.body;
@@ -127,14 +126,14 @@ router.post("/", async function (req, res, next) {
 });
 
 // DELETE GAME
-router.delete("/:id", async function (req, res) {
+router.delete("/games/:id", async function (req, res) {
   const game = Number(req.params.id);
   const deletedGame = await deleteGame(game);
   res.json({ success: true, payload: deletedGame });
 });
 
 // REPLACE GAME
-router.put("/:id", async function (req, res) {
+router.put("/games/:id", async function (req, res) {
   const game = Number(req.params.id);
   const newGame = req.body;
   const update = await replaceGame(game, newGame);
