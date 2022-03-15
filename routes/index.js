@@ -142,7 +142,7 @@ router.post("/games", async function (req, res, next) {
     year,
     developer,
     comments,
-    imageURL
+    image
   );
   res.json({ success: true, payload: newGame });
 });

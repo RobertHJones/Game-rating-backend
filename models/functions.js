@@ -67,11 +67,11 @@ export async function addNewGame(
   year,
   developer,
   comments,
-  imageURL
+  image
 ) {
   const data = await query(
     `INSERT INTO games (title, rating, band, genre, year, developer, comments, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`,
-    [title, rating, band, genre, year, developer, comments, imageURL]
+    [title, rating, band, genre, year, developer, comments, image]
     // [rating],
     // [genre],
     // [year],
