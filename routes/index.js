@@ -277,6 +277,10 @@ router.post("/games", async function (req, res, next) {
   console.log(req);
   const { title, rating, band, genre, year, developer, comments, image } =
     req.body;
+
+  const imageUpload = await cloudinary.uploader.upload(image[0].base64);
+  const imageURL = imageUpload.secure_url;
+
   const newGame = await addNewGame(
     title,
     rating,
