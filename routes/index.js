@@ -1,6 +1,8 @@
 // var express = require('express');
 import express from "express";
 const router = express.Router();
+import cloudinary from "cloudinary";
+import multer from "multer";
 
 import {
   getAllGames,
@@ -16,6 +18,16 @@ import {
   getGameByBand,
   getGameBySearch,
 } from "../models/functions.js";
+import { cloudName, apiKey, apiSecret } from "../config.js";
+const storage = multer.memoryStorage();
+const multerUploads = multer({ storage }).single("image");
+export { multerUploads };
+
+cloudinary.config({
+  cloud_name: cloudName,
+  api_key: apiKey,
+  api_secret: apiSecret,
+});
 
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
@@ -112,6 +124,16 @@ router.post("/games", async function (req, res, next) {
   console.log(req);
   const { title, rating, band, genre, year, developer, comments, image } =
     req.body;
+
+  // const imageURL = [];
+  // for (let i = 0; i < image.length; i++) {
+  //   const cloudinaryRes = await cloudinary.uploader.upload(image[i].base64);
+  //   imageURL.push(cloudinaryRes.secure_url);
+  // }
+
+  const imageUpload = await cloudinary.uploader.upload(image[0].base64);
+  const imageURL = imageUpload.secure_url;
+
   const newGame = await addNewGame(
     title,
     rating,
@@ -120,7 +142,7 @@ router.post("/games", async function (req, res, next) {
     year,
     developer,
     comments,
-    image
+    imageURL
   );
   res.json({ success: true, payload: newGame });
 });
