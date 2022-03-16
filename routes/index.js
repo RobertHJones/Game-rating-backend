@@ -3,6 +3,7 @@ import express from "express";
 const router = express.Router();
 import cloudinary from "cloudinary";
 import multer from "multer";
+import cors from "cors";
 
 import {
   getAllGames,
@@ -131,8 +132,8 @@ router.post("/games", async function (req, res, next) {
   //   imageURL.push(cloudinaryRes.secure_url);
   // }
 
-  // const imageUpload = await cloudinary.uploader.upload(image[0].base64);
-  // const imageURL = imageUpload.secure_url;
+  const imageUpload = await cloudinary.uploader.upload(image[0].base64);
+  const imageURL = imageUpload.secure_url;
 
   const newGame = await addNewGame(
     title,
@@ -142,7 +143,7 @@ router.post("/games", async function (req, res, next) {
     year,
     developer,
     comments,
-    image
+    imageURL
   );
   res.json({ success: true, payload: newGame });
 });
