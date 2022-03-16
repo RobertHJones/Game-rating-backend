@@ -121,7 +121,7 @@ router.get("/games/:id", async function (req, res) {
 });
 
 // ADD NEW GAME
-router.post("/games", async function (req, res, next) {
+router.post("/games", cors(), async function (req, res, next) {
   console.log(req);
   const { title, rating, band, genre, year, developer, comments, image } =
     req.body;
