@@ -2,4 +2,4 @@
 
 The backend architecture for my games database
 
-https://readme.so/
+Deployed at https://dbdb-game-db.herokuapp.com/

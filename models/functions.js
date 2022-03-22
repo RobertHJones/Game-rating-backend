@@ -50,6 +50,7 @@ export async function getGameByBand(band) {
   return data.rows;
 }
 
+// For a more specific search
 export async function getGameBySearch(title, genre, band) {
   const result = await db.query(
     `SELECT * FROM games WHERE title ILIKE '%' || $1 || '%' AND  genre = $2  AND band = $3`,
@@ -72,12 +73,8 @@ export async function addNewGame(
   const data = await query(
     `INSERT INTO games (title, rating, band, genre, year, developer, comments, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`,
     [title, rating, band, genre, year, developer, comments, imageURL]
-    // [rating],
-    // [genre],
-    // [year],
-    // [developer]
   );
-  // const data = await query (`INSERT INTO games (title, rating, genre, year, developer, comments) VALUES ($1, $2, $3, $4, $5, $6);`)
+
   return data.rows;
 }
 // DELETE GAME

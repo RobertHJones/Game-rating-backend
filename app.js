@@ -6,7 +6,6 @@ import logger from "morgan";
 import cors from "cors";
 
 import indexRouter from "./routes/index.js";
-// import usersRouter from "./routes/users.js";
 
 const app = express();
 
@@ -16,13 +15,12 @@ app.use(logger("dev"));
 //   next();
 // });
 app.use(cors());
-app.use(express.json({ limit: "100mb" }));
+app.use(express.json({ limit: "100mb" })); // to allow photo uploads of a decent size
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static("public"));
 
 app.use("/", indexRouter);
-// app.use("/users", usersRouter);
 app.set("view engine", "jade");
 
 // catch 404 and forward to error handler

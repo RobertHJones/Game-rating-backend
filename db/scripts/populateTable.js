@@ -1,6 +1,8 @@
 import { query } from "../index.js";
 import { games } from "../../games.js";
 
+// Populate the table with all games from games.js
+
 const sqlString = `INSERT INTO games (title, rating, band, genre, year, developer, comments, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING user`;
 
 async function populateGamesTable() {

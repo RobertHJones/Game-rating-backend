@@ -1,4 +1,3 @@
-// const { Pool } = require('pg')
 import pg from "pg";
 import {
   host,
@@ -10,14 +9,9 @@ import {
 } from "../config.js";
 
 console.log(host);
-// const pool = new Pool()
+
 const pool = new pg.Pool({
-  // data from heroku
-  // user: username,
-  // host: host,
-  // database: dbname,
-  // password: password,
-  // port: port,
+  // connection from heroku
   connectionString: databaseURL,
   ssl: { rejectUnauthorized: false },
 });

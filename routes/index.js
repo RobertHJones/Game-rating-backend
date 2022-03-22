@@ -1,4 +1,3 @@
-// var express = require('express');
 import express from "express";
 const router = express.Router();
 import cloudinary from "cloudinary";
@@ -19,7 +18,7 @@ import {
   getGameByBand,
   getGameBySearch,
 } from "../models/functions.js";
-import { cloudName, apiKey, apiSecret } from "../config.js";
+import { cloudName, apiKey, apiSecret } from "../config.js"; // import cloudinary credentials
 const storage = multer.memoryStorage();
 const multerUploads = multer({ storage }).single("image");
 export { multerUploads };
@@ -103,6 +102,7 @@ router.get("/games", async function (req, res) {
   res.json({ success: true, payload: games });
 });
 
+// For more specific search
 // router.get("/games", async function (req, res, next) {
 //   const { title, genre, band } = req.query;
 //   const game = await getGameBySearch(title, genre, band);
@@ -125,12 +125,6 @@ router.post("/games", cors(), async function (req, res, next) {
   console.log(req);
   const { title, rating, band, genre, year, developer, comments, image } =
     req.body;
-
-  // const imageURL = [];
-  // for (let i = 0; i < image.length; i++) {
-  //   const cloudinaryRes = await cloudinary.uploader.upload(image[i].base64);
-  //   imageURL.push(cloudinaryRes.secure_url);
-  // }
 
   const imageUpload = await cloudinary.uploader.upload(image[0].base64);
   const imageURL = imageUpload.secure_url;
