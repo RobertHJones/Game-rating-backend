@@ -6,7 +6,7 @@ import { query } from "../db/index.js";
 export async function getAllGames() {
   console.log("test");
   const data = await query(`SELECT * FROM games;`);
-  console.log("games are", data);
+  // console.log("games are", data);
   return data.rows;
 }
 // GET GAME BY ID

@@ -4,7 +4,10 @@ export const dbname = process.env.PGDATABASE;
 export const host = process.env.PGHOST;
 export const password = process.env.PGPASSWORD;
 export const port = process.env.PGPORT;
-export const databaseURL = process.env.DATABASE_URL;
+export const databaseURL =
+  process.env.Environment === "test"
+    ? process.env.DATABASE_URL_TEST // pgadmin table
+    : process.env.DATABASE_URL;
 
 // Cloudinary details
 export const cloudName = process.env.CLOUD_NAME;
