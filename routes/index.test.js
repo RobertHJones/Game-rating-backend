@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../app.js";
 
-// dummy table for testing
+// dummy table for testing table
 const game = {
   id: expect.any(Number),
   title: expect.any(String),
