@@ -37,7 +37,14 @@ router.get("/", function (req, res, next) {
 router.get("/games", async function (req, res) {
   const { title, rating, band, genre, year, developer, comments } = req.query;
 
-  if (title) {
+  // For more specific search
+  if (title !== undefined && genre !== undefined && band !== undefined) {
+    const game = await getGameBySearch(title, genre, band);
+    res.json({
+      success: true,
+      payload: game,
+    });
+  } else if (title) {
     const searchResults = await getGameByTitle(title);
     res.json({
       success: true,
@@ -45,9 +52,7 @@ router.get("/games", async function (req, res) {
       payload: searchResults,
     });
     return;
-  }
-
-  if (genre) {
+  } else if (genre) {
     const searchResults = await getGameByGenre(genre);
     res.json({
       success: true,
@@ -55,9 +60,7 @@ router.get("/games", async function (req, res) {
       payload: searchResults,
     });
     return;
-  }
-
-  if (developer) {
+  } else if (developer) {
     const searchResults = await getGameByDeveloper(developer);
     res.json({
       success: true,
@@ -65,9 +68,7 @@ router.get("/games", async function (req, res) {
       payload: searchResults,
     });
     return;
-  }
-
-  if (year) {
+  } else if (year) {
     const searchResults = await getGameByYear(year);
     res.json({
       success: true,
@@ -75,9 +76,7 @@ router.get("/games", async function (req, res) {
       payload: searchResults,
     });
     return;
-  }
-
-  if (rating) {
+  } else if (rating) {
     const searchResults = await getGameByRating(rating);
     res.json({
       success: true,
@@ -85,9 +84,7 @@ router.get("/games", async function (req, res) {
       payload: searchResults,
     });
     return;
-  }
-
-  if (band) {
+  } else if (band) {
     const searchResults = await getGameByBand(band);
     res.json({
       success: true,
@@ -101,17 +98,6 @@ router.get("/games", async function (req, res) {
   // console.log("games", games);
   res.json({ success: true, payload: games });
 });
-
-// For more specific search
-// router.get("/games", async function (req, res, next) {
-//   const { title, genre, band } = req.query;
-//   const game = await getGameBySearch(title, genre, band);
-
-//   res.json({
-//     success: true,
-//     payload: game,
-//   });
-// });
 
 // GET GAME BY ID
 router.get("/games/:id", async function (req, res) {
