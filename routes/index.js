@@ -38,13 +38,14 @@ router.get("/games", async function (req, res) {
   const { title, rating, band, genre, year, developer, comments } = req.query;
 
   // For more specific search
-  if (title !== undefined && genre !== undefined && band !== undefined) {
-    const game = await getGameBySearch(title, genre, band);
-    res.json({
-      success: true,
-      payload: game,
-    });
-  } else if (title) {
+  // if (title !== undefined && genre !== undefined && band !== undefined) {
+  //   const game = await getGameBySearch(title, genre, band);
+  //   res.json({
+  //     success: true,
+  //     payload: game,
+  //   });
+  // }
+  if (title) {
     const searchResults = await getGameByTitle(title);
     res.json({
       success: true,
@@ -52,7 +53,8 @@ router.get("/games", async function (req, res) {
       payload: searchResults,
     });
     return;
-  } else if (genre) {
+  }
+  if (genre) {
     const searchResults = await getGameByGenre(genre);
     res.json({
       success: true,
@@ -60,7 +62,8 @@ router.get("/games", async function (req, res) {
       payload: searchResults,
     });
     return;
-  } else if (developer) {
+  }
+  if (developer) {
     const searchResults = await getGameByDeveloper(developer);
     res.json({
       success: true,
@@ -68,7 +71,8 @@ router.get("/games", async function (req, res) {
       payload: searchResults,
     });
     return;
-  } else if (year) {
+  }
+  if (year) {
     const searchResults = await getGameByYear(year);
     res.json({
       success: true,
@@ -76,7 +80,8 @@ router.get("/games", async function (req, res) {
       payload: searchResults,
     });
     return;
-  } else if (rating) {
+  }
+  if (rating) {
     const searchResults = await getGameByRating(rating);
     res.json({
       success: true,
@@ -84,7 +89,8 @@ router.get("/games", async function (req, res) {
       payload: searchResults,
     });
     return;
-  } else if (band) {
+  }
+  if (band) {
     const searchResults = await getGameByBand(band);
     res.json({
       success: true,
